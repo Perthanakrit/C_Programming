@@ -20,7 +20,8 @@ int main()
     printf("%d\n", b);
 
     float q = 1 / 5.0;
-    printf("%f", q);
+    printf("%f\n", q);
+    printf("%d", 012 + 123);
 
     return 0;
 }
