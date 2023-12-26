@@ -9,12 +9,14 @@ int main()
 
     fgets(numInput, 10, stdin);
     num = atoi(numInput);
-    printf("%d\n", num);
-    // 7 : 00000111 // 00001110
-    for (int j = 1 << 7; j > 0; j /= 2)
+
+    printf("Binary number of %d is ", num);
+    for (i = 0; i < 4; i++)
     {
-        printf("%d", j);
+        int temp = (num & (int)pow(2, 3 - i)) >> (3 - i); //
+        printf("%d", temp);
     }
+    printf(".\n");
 
     return 0;
 }

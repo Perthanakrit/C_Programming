@@ -3,6 +3,8 @@
     "*.cs": "csharp",
     "stdio.h": "c",
     "stdlib.h": "c",
-    "math.h": "c"
+    "math.h": "c",
+    "__locale": "c",
+    "ratio": "c"
   }
 }

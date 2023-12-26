@@ -1,18 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <math.h>
+// If a number is divisible by any integer between 2 and the square root, it is not prime.
 int is_prime(int i)
 {
-    int count = 1, n2, j = 1;
+    int j;
     if (i >= 2)
     {
-        for (; j <= 19; j++)
+        int limit = sqrt(i);
+        for (j = 2; j <= limit; j++)
         {
-            if (i % j == 0 && i > 9)
-            {
-                count += 1;
-            }
-            if (count > 2)
+            if (i % j == 0)
             {
                 return 0;
             }
