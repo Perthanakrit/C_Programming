@@ -1,5 +1,7 @@
 #include <stdio.h>
 
+extern number = 5;
+
 int getstring(char buf[], int size)
 {
     int i;
@@ -27,6 +29,7 @@ int fib(int n)
     }
     return fib(n - 1) + fib(n - 2);
 }
+
 int main()
 {
     int n = 5;

@@ -1,5 +1,8 @@
 #include <stdio.h>
 #include <math.h>
+#include <stdlib.h>
+
+static int i;
 
 int main()
 {
@@ -9,10 +12,13 @@ int main()
 	double sumNum(float data[], int n);
 	float sumNumO(float data[], int n);
 	int sumTw(int data[], int n);
+	int i;
 
 	// printf("%lf\n", sumNum((float[]){1.0, 2.0, 3.0}, 3));
-	printf("%f\n", sumNumO((float[]){1.0, 2.0, 3.0}, 3));
+	// printf("%f\n", sumNumO((float[]){1.0, 2.0, 3.0}, 3));
 	// printf("%d\n", sumTw((int[]){1, 2, 3}, 3));
+
+	printf("%d, ", i);
 	return 0;
 }
 

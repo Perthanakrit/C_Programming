@@ -75,3 +75,48 @@ int main()
   > **_เมื่อเรียกใช้ตนเอง โปรแกรมจะสำเนาค่าตัวแปรต่างๆ ภายในฟังก์ชัน โดยเป็นอิสระจากการถูกเรียนกใช้ครั้งก่นอหน้า_**
 
 ### 8. Funcion Call & Stack Frames
+
+## Scope Rules
+
+### Strorage Classes
+
+- storage class 4 ประเภท แบ่งเป็น 2 storage duration
+- **2 storage duration** - static duration : อยู่ใน memory ตลอดเวลา - automatic duration : อยู่ใน memory เมื่อ function ถูกเรียกใช้งาน และถูกลบออกเมื่อ function จบการทำงาน
+  > **keyword** \
+      - local: อยู่ที่ automaic โดย default \
+      - auto \
+      - register : ใช้เก็บตัวแปรที่ใช้บ่อย แต่ไม่สามารถใช้ & ได้ \
+      - static: มีชีวิตอยู่ก่อน หรืออยู่ใน memory ก่อนโปรแกรมเริ่มทำงาน หรือ int main() \
+      	- extern: คล้ายๆ static แต่เป็น global ซึ่งเป็น default ของ gloabal variable
+
+```
+float func(void)
+{
+	static float score; // อยู่ใน uninitialized data segment และมีค่า default เป็น 0
+	score += 2;
+	return score;
+}
+```
+
+### Dynamic Storage Duration
+
+### Makefile(Tool)
+
+```
+target: dependancy
+-->tab--> คำสั่งที่ใช้ในการสร้าง target (recipe)
+```
+
+**_Ex_**
+
+```
+main.o: main.c
+	gcc -c main
+```
+
+## Shared (Dynamic) Libraries
+
+- Mac OS : .dylib
+  ```
+  gcc -shared -o libfunc.dylib func.o
+  ```
