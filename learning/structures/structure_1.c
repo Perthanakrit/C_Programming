@@ -13,6 +13,12 @@ typedef struct
 
 } Rectangle;
 
+typedef struct triangle
+{
+	int base;
+	int height;
+} t1;
+
 int main()
 {
 	int length, width;
@@ -20,11 +26,10 @@ int main()
 
 	Rectangle my_box;
 
+	t1 ti = {1, 2};
+
 	struct coord cd[3] = {{1, 2}, {3, 4}, {5, 6}};
 	int i;
 
-	for (i = 0; i < 4; i++)
-	{
-		printf("%d %d\n", cd[i].x, cd[i].y);
-	}
+	printf("%d, %d\n", ti.base, ti.height);
 }
