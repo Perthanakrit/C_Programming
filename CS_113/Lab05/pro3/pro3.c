@@ -47,10 +47,10 @@ int main()
         printf("Input Value: ");
         scanf("%f", &input_value);
         initail_value = caluculated_value(initail_value, input_value, operator[0]);
-        printf("Present Value: %.4f\n\n", initail_value);
+        printf("Present Value is %.4f\n\n", initail_value);
     }
 
-    printf("\nFinish Calculation. Final Value is: %.4f\n", initail_value);
+    printf("\nFinish Calculation. Final Value is %.4f\n", initail_value);
 
     return 0;
 }

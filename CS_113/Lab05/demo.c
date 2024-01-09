@@ -25,12 +25,14 @@ int main()
     int data[10] = {1, 2, 3, 4, 5, 6, 7, 8};
 
     printf("data = %d, ref = %p\n", data[0], &data[0]);
-    printf("data = %p", data); // printf("data = %p", data + 1 (4 bytes));
+    printf("data = %p\n", data); // printf("data = %p", data + 1 (4 bytes));
 
     // int *arrPtr = data;
+    a += 2;
 
+    printf("a = %d, ptr = %d (%p)\n", a, *ptr, ptr);
     addTwenty(&a);
-    printf("a = %d\n", a);
+    printf("a (after +20) = %d\n", a);
 
     return 0;
 }

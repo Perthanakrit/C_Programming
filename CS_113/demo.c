@@ -1,13 +1,45 @@
 #include <stdio.h>
 
+void filter_arr(int *array, int size, int target)
+{
+    int i, j = 0;
+    int deleted = 0;
+    int new_size = size - 1;
+    int new_arr[new_size];
+
+    for (i = 0; i < size; i++, array++)
+    {
+        if (*array == target)
+        {
+            deleted = 1;
+        }
+        else
+        {
+            new_arr[j] = *array;
+            j++;
+        }
+    }
+    array -= size;
+    for (i = 0; i < new_size; i++, array++)
+    {
+        *array = new_arr[i];
+    }
+}
+
 int main()
 {
-    int i;
-    int a = 5;
-    for (i = 0; i < 5; i++)
-    {
+    int arr[] = {1, 2, 3, 4, 5};
 
-        printf("%d ", a--);
+    filter_arr(&arr[0], 5, 3);
+
+    filter_arr(&arr[0], 4, 1);
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (i == 1)
+            continue;
+        printf("%d ", arr[i]);
     }
+
     return 0;
 }
