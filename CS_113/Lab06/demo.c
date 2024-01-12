@@ -31,31 +31,30 @@ int main()
     int arr[] = {1, 2, 3, 4, 5};
 
     char s1[] = {'u', 'n', 'i', 'v', 'e', 'r', 's', 'i', 't', 'y'};
-    char s2[] = "university";
-    char *s3[10];
+    // char s2[4] = {"university", "world"};
+    int size = 10;
+    char *s3[size];
 
-    printf("%d\n", sizeof(s1) - sizeof(s2));
+    // printf("%s\n", s2[1]);
 
-    // filter_arr(&arr[0], 5, 3);
-
-    // filter_arr(&arr[0], 4, 1);
-
-    // for (int i = 0; i < 3; i++)
+    // for (int i = 0; i < size; i++)
     // {
-    //     if (i == 1)
-    //         continue;
-    //     printf("%d ", arr[i]);
+    //     char ch[] = {(char)(97 + i), (char)(98 + i), '\0'};
+    //     *(s3 + i) = ch;
+    // }
+    int x = 23;
+    printf("%d\n", -12 + x--);
+    printf("%o\n", 012);
+
+    // for (int i = 0; i < size; i++)
+    // {
+    //     printf("%s - %p\n", *(s3 + i), s3 + i);
     // }
 
-    for (int i = 0; i < 10; i++)
-    {
-        *(s3 + i) = "uni";
-    }
-
-    for (int i = 0; i < 10; i++)
-    {
-        printf("%s\n", *(s3 + i));
-    }
+    // for (int i = 0; i < size; i++)
+    // {
+    //     printf("%c - %p\n", **(s3 + i), *(s3 + i) + i);
+    // }
 
     return 0;
 }

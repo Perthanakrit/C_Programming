@@ -5,6 +5,7 @@
     "stdlib.h": "c",
     "math.h": "c",
     "__locale": "c",
-    "ratio": "c"
+    "ratio": "c",
+    "typeinfo": "c"
   }
 }

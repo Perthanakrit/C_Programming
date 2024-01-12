@@ -114,9 +114,64 @@ main.o: main.c
 	gcc -c main
 ```
 
-## Shared (Dynamic) Libraries
+### Static Libraries
+
+```
+gcc -c func.c
+ar cr libfunc.a func.o
+```
+
+### Shared (Dynamic) Libraries
 
 - Mac OS : .dylib
   ```
   gcc -shared -o libfunc.dylib func.o
   ```
+
+### Create your Lib.
+
+1. สร้างไฟล์ .c และเขียนโค้ด
+2. Compile the source file into an object file (.o file):
+
+```
+gcc -c mylibrary.c -o mylibrary.o
+```
+
+3. Create Static lib or Dynamic lib
+
+- static lib
+
+```
+ar rcs libmylibrary.a mylibrary.o
+```
+
+- dynamic lib
+
+```
+gcc -shared -o libmylibrary.so mylibrary.o
+```
+
+4. Create executable file
+
+```
+gcc -o main myprogram.c -L. -lfunc
+```
+
+> -L. : ให้ไปหา lib ใน directory ปัจจุบัน
+
+**##เพิ่มเติม** : ถ้าต้องสร้าง header file
+
+> สร้างไฟล์ .h และเขียนโค้ด
+> จากนั้นในไฟล์ main ให้ include "func.h"
+
+1. สร้าง static lib และ include header file
+
+```
+gcc -c main.c -Iinclude
+```
+
+2. สร้าง executable file และ link กับ static lib
+
+```
+gcc main.o -o main.out -L. -lfunc
+```
