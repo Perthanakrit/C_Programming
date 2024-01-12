@@ -18,6 +18,12 @@ int main()
         prisoners[i] = i + 1;
     }
 
+    for (i = 0; i < numPrisoners; i++)
+    {
+        printf("%d ", prisoners[i]);
+    }
+    puts("");
+
     int *killerPtr = &prisoners[0];
 
     // printf("@@ &prisoners[0] %p\n", &prisoners[0]);
@@ -26,18 +32,20 @@ int main()
     // Select prisoner to be killed
     for (i = 0; i < numPrisoners; i++)
     {
-        killerPtr = &prisoners[0];
-        for (int j = 1; j <= numPrisoners; j++, killerPtr++)
+        for (int j = 1; j <= m; j++)
         {
-            if (j == m)
+            if (*killerPtr == 0)
             {
-                // append number of prisoner who is killed to array `killed`
-                killed[i] = *killerPtr;
-                // remove number killed prisoner from array `prisoners`
-                removeKilled(&prisoners[0], numPrisoners, *killerPtr);
-                break;
+                killerPtr = &prisoners[0];
             }
+            if (j != m)
+                killerPtr++;
         }
+        // append number of prisoner who is killed to array `killed`
+        killed[i] = *killerPtr;
+        // remove number killed prisoner from array `prisoners`
+        removeKilled(&prisoners[0], numPrisoners, *killerPtr);
+        // numPrisoners--;
     }
 
     for (i = 0; i < numPrisoners; i++)
@@ -49,26 +57,33 @@ int main()
 
 void removeKilled(int *array, int size, int killedPrisoner)
 {
-    int i, j = 0;
+    int i;
     int deleted = 0;
-    int new_size = size - 1;
-    int new_arr[new_size];
 
-    for (i = 0; i < size; i++, array++)
+    for (i = 0; i < size; i++)
     {
-        if (*array == killedPrisoner)
+        if (*(array + i) == killedPrisoner)
         {
             deleted = 1;
         }
-        else
+
+        if (deleted)
         {
-            new_arr[j] = *array;
-            j++;
+            if (i == size - 1)
+            {
+                *(array + i) = 0;
+            }
+            else
+            {
+                *(array + i) = *(array + i + 1);
+            }
         }
     }
-    array -= size;
-    for (i = 0; i < new_size; i++, array++)
-    {
-        *array = new_arr[i];
-    }
+
+    // printf("Array: ");
+    // for (i = 0; i < size; i++)
+    // {
+    //     printf("%d ", array[i]);
+    // }
+    // printf("\n");
 }

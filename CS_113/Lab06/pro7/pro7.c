@@ -59,4 +59,11 @@ void removeTarget(int *array, int size, int target)
             }
         }
     }
+    // array -= size;
+    // printf("array after remove:");
+    // for (i = 0; i < size; i++)
+    // {
+    //     printf("%d ", *(array + i));
+    // }
+    // puts("");
 }

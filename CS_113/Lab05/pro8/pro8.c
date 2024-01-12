@@ -1,36 +1,54 @@
 #include <stdio.h>
 
-void climbing_up(int step, char ladder[][26], int n)
+#define arC "|---|"
+#define arC_head "|-O-|"
+#define arC_tail "|-^-|"
+
+void print_ladder(char *ladder[10], int n)
 {
-    int i, j;
-    int moved = 0;
-    int next_floor, new_pos;
-
-    for (i = 0; i < n; i++)
+    for (int i = 0; i < n; i++)
     {
-        if (!moved && step != 0)
-        {
-            next_floor = i + step;
-
-            if (ladder[next_floor][2] == '0')
-            {
-                new_pos = next_floor - step;
-                ladder[new_pos][2] = '0';
-                ladder[new_pos + 1][2] = '^';
-
-                moved = 1;
-            }
-        }
-        else if (moved && i > new_pos + 1)
-        {
-            ladder[i][2] = '-';
-        }
-
         printf("%s\n", ladder[i]);
     }
 }
 
-void climbing_down(int step, char ladder[][26], int n)
+void new_climbing_up(int step, char *ladder[10], int n)
+{
+    int i, j;
+    int moved = 0;
+    int next_floor, new_pos;
+
+    for (i = n - 1, j = 0; i >= 0; i--, j++)
+    {
+        if (step != 0)
+        {
+            if (ladder[i][2] == arC_tail[2] && !moved)
+            {
+                new_pos = i - step;
+                if (new_pos <= 0)
+                {
+                    new_pos = 1;
+                }
+                // printf("new_pos-%d", new_pos);
+                // ladder[i] = arC;
+                ladder[new_pos] = arC_tail;
+                ladder[new_pos - 1] = arC_head;
+                moved = 1;
+            }
+
+            if (i > new_pos)
+            {
+                ladder[i] = arC;
+            }
+        }
+
+        // printf("%s\n", ladder[j]);
+    }
+
+    // print_ladder(ladder, n);
+}
+
+void new_climbing_down(int step, char *ladder[10], int n)
 {
     int i, j;
     int moved = 0;
@@ -38,22 +56,31 @@ void climbing_down(int step, char ladder[][26], int n)
 
     for (i = 0; i < n; i++)
     {
-        new_pos = i + step;
-        if (!moved && ladder[i][2] == '^' && new_pos < n)
+        if (step != 0)
         {
-            ladder[new_pos - 1][2] = '0';
-            ladder[new_pos][2] = '^';
-            ladder[i][2] = '-';
-            moved = 1;
+            if (ladder[i][2] == arC_head[2] && !moved)
+            {
+                new_pos = i + step;
+                if (new_pos >= n - 1)
+                {
+                    new_pos = n - 2;
+                }
+
+                ladder[new_pos] = arC_head;
+                ladder[new_pos + 1] = arC_tail;
+                moved = 1;
+            }
+
+            if (i < new_pos)
+            {
+                ladder[i] = arC;
+            }
         }
 
-        if (!moved && new_pos < n)
-        {
-            ladder[i][2] = '-';
-        }
-
-        printf("%s\n", ladder[i]);
+        // printf("%s\n", ladder[i]);
     }
+
+    // print_ladder(ladder, n);
 }
 
 int main()
@@ -62,9 +89,8 @@ int main()
     printf("Input number of stairs: ");
     scanf("%d", &num_of_stairs);
 
-    char arC[6] = "|---|";
     int step = 0, round = 1;
-    char ladder[num_of_stairs][26];
+    char *ladder[100];
 
     if (num_of_stairs < 2)
     {
@@ -73,34 +99,33 @@ int main()
 
     for (int i = 0; i < num_of_stairs; i++)
     {
-        for (int j = 0; j < sizeof(arC); j++)
-        {
-            if (i == num_of_stairs - 1 && j == 2)
-                ladder[i][j] = '^';
-            else if (i == num_of_stairs - 2 && j == 2)
-                ladder[i][j] = '0';
-            else
-                ladder[i][j] = arC[j];
-        }
+
+        if (i == num_of_stairs - 2)
+            *(ladder + i) = "|-O-|";
+        else if (i == num_of_stairs - 1)
+            *(ladder + i) = "|-^-|";
+        else
+            *(ladder + i) = arC;
     }
 
     // main
     while (1)
     {
         printf("---- round %d ----\n", round);
-        if (step >= 0)
-        {
-            climbing_up(step, ladder, num_of_stairs);
-        }
-        else
-        {
-            climbing_down(-step, ladder, num_of_stairs);
-        }
-
-        printf("Input number of stairs: ");
+        print_ladder(ladder, num_of_stairs);
+        printf("Input step command: ");
         scanf("%d", &step);
         if (step == 0)
             break;
+
+        if (step > 0)
+        {
+            new_climbing_up(step, ladder, num_of_stairs);
+        }
+        else
+        {
+            new_climbing_down(-step, ladder, num_of_stairs);
+        }
         round++;
     }
 
