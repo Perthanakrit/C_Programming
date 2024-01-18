@@ -6,6 +6,7 @@ int main()
     // printf("Enter name: ");
     // scanf("%s", name);
     // printf("Your name is %s.\n\t %s", name, m);
-    printf("%c\n", 0); // return Null
+    char n[] = {'p', 'e', 'r', 's', 'o', '\0'};
+    printf("%s\n", n); // return Null
     return 0;
 }

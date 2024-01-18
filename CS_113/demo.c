@@ -34,7 +34,11 @@ int main()
     char s2[] = "university";
     char *s3[10];
 
-    printf("%d\n", sizeof(s1) - sizeof(s2));
+    printf("A");
+    puts("B");
+    putchar('C');
+
+    // printf("%d\n", sizeof(s1) - sizeof(s2));
 
     // filter_arr(&arr[0], 5, 3);
 
@@ -47,15 +51,15 @@ int main()
     //     printf("%d ", arr[i]);
     // }
 
-    for (int i = 0; i < 10; i++)
-    {
-        *(s3 + i) = "uni";
-    }
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     *(s3 + i) = "uni";
+    // }
 
-    for (int i = 0; i < 10; i++)
-    {
-        printf("%s\n", *(s3 + i));
-    }
+    // for (int i = 0; i < 10; i++)
+    // {
+    //     printf("%s\n", *(s3 + i));
+    // }
 
     return 0;
 }
