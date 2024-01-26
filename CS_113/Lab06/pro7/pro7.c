@@ -59,11 +59,34 @@ void removeTarget(int *array, int size, int target)
             }
         }
     }
-    // array -= size;
-    // printf("array after remove:");
-    // for (i = 0; i < size; i++)
-    // {
-    //     printf("%d ", *(array + i));
-    // }
-    // puts("");
+    array -= size;
+    printf("array after remove: ");
+    for (i = 0; i < size; i++)
+    {
+        printf("%d ", *(array + i));
+    }
+    puts("");
+}
+
+void test_rem(int *array, int size, int target)
+{
+    int i;
+    for (i = 0; i < size; i++)
+    {
+        if (array[i] == target)
+            break;
+    }
+
+    for (; i < size - 1; i++)
+    {
+        array[i] = array[i + 1];
+    }
+
+    array[size - 1] = 0;
+
+    for (i = 0; i < size; i++)
+    {
+        printf("%d ", array[i]);
+    }
+    puts("-");
 }

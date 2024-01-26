@@ -35,9 +35,7 @@ int main()
         for (int j = 1; j <= m; j++)
         {
             if (*killerPtr == 0)
-            {
                 killerPtr = &prisoners[0];
-            }
             if (j != m)
                 killerPtr++;
         }
@@ -79,11 +77,4 @@ void removeKilled(int *array, int size, int killedPrisoner)
             }
         }
     }
-
-    // printf("Array: ");
-    // for (i = 0; i < size; i++)
-    // {
-    //     printf("%d ", array[i]);
-    // }
-    // printf("\n");
 }

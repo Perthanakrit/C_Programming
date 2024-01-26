@@ -1,29 +1,99 @@
 #include <stdio.h>
+#include <stdlib.h>
 struct node
 {
     int data;
     struct node *next;
 };
+
+struct node *create_stack_list(int input[], int size)
+{
+    struct node *head, *temp;
+    int i;
+
+    head = NULL;
+
+    for (i = 0; i < size; i++)
+    {
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp->data = input[i];
+        temp->next = head;
+        head = temp;
+    }
+
+    return head;
+};
+
+struct node *create_list(int input[], int size)
+{
+    struct node *head, *tail, *temp;
+    int i;
+
+    head = tail = NULL;
+
+    for (i = 0; i < size; i++)
+    {
+        temp = (struct node *)malloc(sizeof(struct node));
+        temp->data = input[i];
+        temp->next = NULL;
+
+        if (head == NULL)
+        {
+            head = temp;
+        }
+        else
+        {
+            tail->next = temp;
+        }
+        tail = temp;
+    }
+
+    return head;
+};
+
+struct node *create_list_with_head_tail(int input[], int size)
+{
+    struct node *head, *tail, *new_node;
+    // int i;
+
+    head = tail = NULL;
+
+    for (; *input != -1; input++)
+    {
+        new_node = (struct node *)malloc(sizeof(struct node));
+        new_node->data = *input;
+        new_node->next = NULL;
+
+        if (head == NULL)
+        {
+            head = new_node;
+        }
+        else
+        {
+            tail->next = new_node;
+        }
+        tail = new_node;
+    }
+
+    return head;
+};
+
+void delete_node(struct node **head_ref, int item)
+{
+}
+
 int main()
 {
-    struct node *head = NULL;
-    struct node *first = NULL;
-    struct node *second = NULL;
-    struct node *third = NULL;
+    int input[] = {1, 2, 3, 4, 5, -1};
 
-    // allocate 3 nodes in the heap
-    first = (struct node *)malloc(sizeof(struct node));
-    second = (struct node *)malloc(sizeof(struct node));
-    third = (struct node *)malloc(sizeof(struct node));
+    struct node *head, *tmp;
+    head = create_list_with_head_tail(input, 6);
 
-    head = first;     // save the head
-    first->data = 17; // assign data in first node to 17
-    first->next = second;
+    while (head != NULL)
+    {
+        printf("%d ", head->data);
+        head = head->next;
+    }
 
-    second->data = 29;
-    second->next = third;
-
-    third->data = 93;
-    third->next = NULL;
     return 0;
 }
