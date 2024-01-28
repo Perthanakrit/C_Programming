@@ -80,6 +80,33 @@ struct node *create_list_with_head_tail(int input[], int size)
 
 void delete_node(struct node **head_ref, int item)
 {
+    struct node *temp, *prev;
+
+    temp = *head_ref;
+    prev = NULL;
+
+    while (temp != NULL && temp->data != item)
+    {
+        prev = temp;
+        temp = temp->next;
+    }
+
+    if (temp == NULL)
+    {
+        printf("Item not found\n");
+        return;
+    }
+
+    if (prev == NULL)
+    {
+        *head_ref = temp->next;
+    }
+    else
+    {
+        prev->next = temp->next;
+    }
+
+    free(temp);
 }
 
 int main()
@@ -89,11 +116,12 @@ int main()
     struct node *head, *tmp;
     head = create_list_with_head_tail(input, 6);
 
-    while (head != NULL)
-    {
-        printf("%d ", head->data);
-        head = head->next;
-    }
+    printf("%d\n", head->next->next->next->data);
+    // while (head != NULL)
+    // {
+    //     printf("%d ", head->data);
+    //     head = head->next;
+    // }
 
     return 0;
 }

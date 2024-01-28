@@ -38,13 +38,45 @@ void print_link_list(Node *head)
 
     while (temp)
     {
-        printf("data: %d ", temp->data);
-        printf("( %p )\n", temp);
+        printf("data: %d\n", temp->data);
+        // printf("( %p )\n", temp);
         printf("prev: %p\n", temp->prev);
         printf("next: %p\n", temp->next);
 
         temp = temp->next;
         puts("-----");
+    }
+}
+
+void delete_list(Node **head_ref, int input)
+{
+    Node *temp;
+
+    temp = *head_ref;
+
+    while (temp)
+    {
+        if (temp->data == input)
+        {
+            if (temp->prev == NULL)
+            {
+                *head_ref = temp->next;
+            }
+            else
+            {
+                temp->prev->next = temp->next;
+            }
+
+            if (temp->next != NULL)
+            {
+                temp->next->prev = temp->prev;
+            }
+
+            free(temp);
+            break;
+        }
+
+        temp = temp->next;
     }
 }
 
@@ -57,6 +89,8 @@ int main(int argc, char const *argv[])
     insert_list(&head, 1);
     insert_list(&head, 2);
     insert_list(&head, 3);
+
+    delete_list(&head, 1);
 
     print_link_list(head);
 

@@ -34,3 +34,5 @@
 *.so
 *.so.*
 *.dylib
+
+*.png
