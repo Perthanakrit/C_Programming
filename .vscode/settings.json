@@ -6,6 +6,9 @@
     "math.h": "c",
     "__locale": "c",
     "ratio": "c",
-    "typeinfo": "c"
+    "typeinfo": "c",
+    "string.h": "c",
+    "sstream": "c",
+    "ctype.h": "c"
   }
 }

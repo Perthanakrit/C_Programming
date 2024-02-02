@@ -37,6 +37,7 @@ int main()
     printf("A");
     puts("B");
     putchar('C');
+    puts("");
 
     // printf("%d\n", sizeof(s1) - sizeof(s2));
 
@@ -60,6 +61,20 @@ int main()
     // {
     //     printf("%s\n", *(s3 + i));
     // }
+
+    switch ('V')
+    {
+    case 'V':
+    {
+        printf("V");
+        break;
+    }
+    default:
+    {
+        printf("default");
+        break;
+    }
+    }
 
     return 0;
 }
