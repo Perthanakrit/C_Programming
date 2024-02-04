@@ -62,9 +62,15 @@ fopen("file_name", "mode");
   - `fd` : file descriptor
   - `length` : จำนวน byte ที่ต้องการลบ
 
-- `fflush` :
+- `ftell()` : ใช้ในการหาตำแหน่งปัจจุบันของ pointer
+
   ```c
-  fflush(FILE *fp);
+  long ftell(FILE *fp);
+  ```
+
+- `fflush()` :
+  ```c
+   fflush(FILE *fp);
   ```
 
 #### file texual กับ binary file

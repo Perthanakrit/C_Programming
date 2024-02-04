@@ -6,7 +6,9 @@ int main(int argc, char const *argv[])
     float f = 2, g = 5, h, i, j, k;
 
     c = f / b * f;
-    h = a++ / (float)b;        /* h = ? */
+    printf("%c\n", c);
+    h = a++ / (float)b; /* h = ? */
+    printf("%f\n", h);
     j = (float)c / h--;        /* j = ? */
     d = b * h / c;             /* d = ? */
     i = d * f + h--;           /* i = ? */
@@ -14,7 +16,7 @@ int main(int argc, char const *argv[])
     k = (int)i * d / (float)a; /* k = ? */
 
     // printf("h = %f\n", h);
-    // printf("%d %f %f %d %f %d %f\n", c, h, j, d, i, e, k);
-    printf("%d\n", 4 / 3);
+
+    // printf("%d\n", 4 / 3);
     return 0;
 }
