@@ -18,48 +18,26 @@ void roman2arabic(char input[], char output[])
 
     for (i = 0; input[i] != '\n'; i++)
     {
-        curr_char = input[i];
-        switch (curr_char)
+        switch (input[i])
         {
         case 'I':
-        {
-            if (input[i + 1] == 'V')
+            if (input[i + 1] == 'V' || input[i + 1] == 'X')
             {
-                num_value += 4;
-                i++;
-            }
-            else if (input[i + 1] == 'X')
-            {
-                num_value += 9;
-                i++;
+                num_value -= 1;
             }
             else
-                num_value++;
+            {
+                num_value += 1;
+            }
             break;
-        }
         case 'V':
-        {
             num_value += 5;
             break;
-        }
         case 'X':
-        {
             num_value += 10;
             break;
-        }
         default:
-        {
-            if (num_value > 0)
-            {
-                output[j] = (char)(48 + num_value);
-                num_value = 0;
-            }
-            else
-                output[j] = curr_char;
-
-            j++;
             break;
-        }
         }
     }
 }
