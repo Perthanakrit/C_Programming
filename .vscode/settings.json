@@ -9,6 +9,7 @@
     "typeinfo": "c",
     "string.h": "c",
     "sstream": "c",
-    "ctype.h": "c"
+    "ctype.h": "c",
+    "__node_handle": "c"
   }
 }

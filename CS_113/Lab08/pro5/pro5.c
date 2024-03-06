@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 #define ARRAY_SIZE 5
-typedef struct __StudentRecord
+typedef struct
 {
     char id[12];
     int midterm;
@@ -11,6 +11,21 @@ typedef struct __StudentRecord
 
 void findTop(StudentRecord pRec[], int size, StudentRecord **topMid, StudentRecord **topFin)
 {
+    int i;
+    *topMid = &pRec[0];
+    *topFin = &pRec[0];
+
+    for (i = 1; i < size; i++)
+    {
+        if (pRec[i].midterm > (*topMid)->midterm)
+        {
+            *topMid = &pRec[i];
+        }
+        if (pRec[i].final > (*topFin)->final)
+        {
+            *topFin = &pRec[i];
+        }
+    }
 }
 
 int main()
