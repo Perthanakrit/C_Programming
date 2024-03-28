@@ -9,8 +9,10 @@ typedef struct
 
 void bubbleSort(Record *arr, int n)
 {
-    int i, j;
+    int i, j, swap = 0;
     Record temp;
+
+
     for (i = 0; i < n - 1; i++)
     {
         for (j = 0; j < n - i - 1; j++)
@@ -20,7 +22,12 @@ void bubbleSort(Record *arr, int n)
                 temp = arr[j];
                 arr[j] = arr[j + 1];
                 arr[j + 1] = temp;
+                swap = 1;
             }
+        }
+        if (swap == 0)
+        {
+            break;
         }
     }
 }
@@ -28,7 +35,7 @@ void bubbleSort(Record *arr, int n)
 int main(int argc, char const *argv[])
 {
     Record data;
-    FILE *fp = fopen("./assets/data_source_3.dat", "rb"); // Open for reading in binary mode
+    FILE *fp = fopen("./assets/data_source_4.dat", "rb"); // Open for reading in binary mode
 
     double x = 1, y;
     int count = 0;
