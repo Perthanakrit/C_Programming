@@ -4,6 +4,7 @@
 typedef struct song
 {
     char *title;
+    int duration;
     struct song *next;
     struct song *prev;
 } Song;
@@ -14,30 +15,35 @@ typedef struct playlist
     Song *tail;
 } Playlist;
 
-Song *create(char *title);
-void add(Playlist *playlist, char *title);
-void removeSong(Playlist *playlist, char *title);
-void printPlaylist(Playlist *head);
+Song *create(char *, int );
+void add(Playlist **, char *, int);
+void removeSong(Playlist **, char *);
+void sort(Playlist **);
+void printPlaylist(Playlist *);
 
-    int main(int argc, char const *argv[])
+int main(int argc, char const *argv[])
 {
     Playlist *playlist;
 
-    add(playlist, "Why - blackbeans");
-    add(playlist, "Why - blackbeans");
-    removeSong(playlist, "Why - blackbeans");
-    // add(playlist, "Pink - blackbeans");
-    // add(playlist, "Wish - blackbeans");
-    // add(playlist, "OK - blackbeans");
+    add(&playlist, "Why - blackbeans", 3);
+    add(&playlist, "Why - blackbeans", 3);
+    removeSong(&playlist, "Why - blackbeans");
+    add(&playlist, "Pink - blackbeans", 4);
+    add(&playlist, "Wish - blackbeans",5);
+    add(&playlist, "OK - blackbeans", 2);
+
+    sort(&playlist);
+
     printPlaylist(playlist);
 
     return 0;
 }
 
-Song *create(char *title)
+Song *create(char *title, int duration)
 {
-    Song *new = (Song*)malloc(sizeof(Song*));
+    Song *new = (Song *)malloc(sizeof(Song));
     new->title = title;
+    new->duration = duration;
     new->next = NULL;
     new->prev = NULL;
 
@@ -45,52 +51,91 @@ Song *create(char *title)
 }
 
 
-void add(Playlist *playlist, char *title)
+void add(Playlist **playlist, char *title, int duration)
 {
-    Song *newSong = create(title);
+    Song *newSong = create(title, duration);
 
     // Empty list
-    if (playlist->head == NULL)
+    if ((*playlist)->head == NULL)
     {
-        playlist->head = newSong;
+        (*playlist)->head = newSong;
+        (*playlist)->tail = newSong;
     }
     else 
     {
-        playlist->tail->next = newSong;
-        newSong->prev = playlist->tail;
+        (*playlist)->tail->next = newSong;
+        newSong->prev = (*playlist)->tail;
     }
-    playlist->tail = newSong;
+    (*playlist)->tail = newSong;
 }
 
-void removeSong(Playlist *playlist, char *title)
+void removeSong(Playlist **playlist, char *title)
 {
-    Song *temp = playlist->head;
+    Song *curr = (*playlist)->head;
+    Song *del = NULL;
 
-    while (temp != NULL)
+    while (curr != NULL)
     {
-        if (temp->title == title)
+        if (curr->title == title)
         {
-            // If the song is in the middle
-            if (temp->prev != NULL)
+            // If the song is the head
+            if (curr->prev == NULL)
             {
-                temp->prev->next = temp->next;
-            }
-            else
-            {
-                playlist->head = temp->next;
+                del = curr;
+                curr->prev = NULL;
             }
             // If the song is in the middle
-            if (temp->next != NULL)
+            else if (curr->next != NULL && curr->prev != NULL)
             {
-                temp->next->prev = temp->prev;
+                del = curr;
+                curr->prev->next = curr->next;
+                curr->next->prev = curr->prev;
             }
-            else
+            // If the song is the tail
+            else if (curr->next == NULL)
             {
-                playlist->tail = temp->prev;
+                del = curr;
+                curr->prev->next = NULL;
             }
-            free(temp);
+            free(del);
         }
-        temp = temp->next;
+        curr = curr->next;
+    }
+}
+
+void sort(Playlist **playlist)
+{
+    Song *curr = (*playlist)->head;
+    Song *temp = NULL;
+    int swapped = 0;
+
+    while (curr != NULL)
+    {
+        temp = curr->next;
+        while (temp != NULL)
+        {
+            if (curr->duration > temp->duration)
+            {
+                // Swap the duration
+                int tempDuration = curr->duration;
+                curr->duration = temp->duration;
+                temp->duration = tempDuration;
+
+                // Swap the title
+                char *tempTitle = curr->title;
+                curr->title = temp->title;
+                temp->title = tempTitle;
+
+                swapped = 1;
+            }
+            temp = temp->next;
+        }
+        curr = curr->next;
+
+        if (swapped == 0)
+        {
+            break;
+        }
     }
 }
 
@@ -99,7 +144,7 @@ void printPlaylist(Playlist *head)
     Song *temp = head->head;
     while (temp != NULL)
     {
-        printf("%s\n", temp->title);
+        printf("%s , %d\n", temp->title, temp->duration);
         temp = temp->next;
     }
 }

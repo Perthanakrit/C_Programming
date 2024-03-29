@@ -60,9 +60,12 @@ int main(int argc, char const *argv[])
 
     fclose(fp);
 
+    // write to file
+    FILE *fp2 = fopen("./assets/data_source_5_sorted.txt", "w"); // Open for writing in binary mode
     for (int i = 0; i < count; i++)
     {
-        printf("id: %d, m: %.4f, b: %.4f\n", records[i].id, records[i].m, records[i].b);
+        //printf("id: %d, m: %.4f, b: %.4f\n", records[i].id, records[i].m, records[i].b);
+        fprintf(fp2, "id: %d, m: %.4f, b: %.4f\n", records[i].id, records[i].m, records[i].b);
         y = records[i].m * x + records[i].b;
         x = y;
     }
